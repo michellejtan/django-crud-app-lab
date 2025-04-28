@@ -32,7 +32,7 @@ class PlantCreate(CreateView):
 class PlantUpdate(UpdateView):
     model = Plant
     # things could be misspell
-    fields = ['breed', 'description', 'age']
+    fields = ['name', 'species', 'description', 'age']
 
 class PlantDelete(DeleteView):
     model = Plant
