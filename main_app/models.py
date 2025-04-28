@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Plant(models.Model):
@@ -11,3 +12,8 @@ class Plant(models.Model):
 
     def __str__(self):
         return self.name
+    
+    # Define a method to get the URL for this particular plant instance
+    def get_absolute_url(self):
+        # Use the 'reverse' function to dynamically find the URL for viewing this plant's details
+        return reverse('plant-detail', kwargs={'plant_id': self.id})
