@@ -16,6 +16,11 @@
     <p>A {{ plant.age }} year old {{ plant.species }}.</p>
     {% endif %}
     <p><small>{{ plant.description }}</small></p>
-  </div>
+  
+    <div class="plant-actions">
+        <a href="{% url 'plant-update' plant.id %}" class="btn warn">Edit</a>
+        <a href="{% url 'plant-delete' plant.id %}" class="btn danger">Delete</a>
+      </div>
+</div>
 </section>
 {% endblock %}
