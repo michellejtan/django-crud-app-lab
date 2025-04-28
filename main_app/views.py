@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plant
 # Create your views here.
 # Import HttpResponse to send text-based responses
@@ -27,3 +27,15 @@ class PlantCreate(CreateView):
     # fields = '__all__'
     # more explicit
     fields = ['name', 'species', 'description', 'age']
+    # success_url = '/plants/' #static page
+
+class PlantUpdate(UpdateView):
+    model = Plant
+    # things could be misspell
+    fields = ['breed', 'description', 'age']
+
+class PlantDelete(DeleteView):
+    model = Plant
+    success_url = '/plants/' #make sense in this case, it's no longer in database after delete
+
+
