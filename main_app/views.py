@@ -16,3 +16,7 @@ def plant_index(request):
     return render(request, 'plants/index.html', {
         'plants': plants
     })
+
+def plant_detail(request, plant_id):
+    plant = Plant.objects.get(id=plant_id)
+    return render(request, 'plants/detail.html', {'plant': plant})
