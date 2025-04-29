@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plant
+from .forms import CareForm
+
 # Create your views here.
 # Import HttpResponse to send text-based responses
 # from django.http import HttpResponse
@@ -20,7 +22,10 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
     plant = Plant.objects.get(id=plant_id)
-    return render(request, 'plants/detail.html', {'plant': plant})
+    care_form = CareForm()
+    return render(request, 'plants/detail.html', {
+        'plant': plant, 'care_form': care_form
+    })
 
 class PlantCreate(CreateView):
     model = Plant
