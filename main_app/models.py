@@ -9,6 +9,19 @@ CARE_TIMES = (
 )
 #^the value that will be stored in the database,  the human-friendly “display” value
 
+class Supply(models.Model):
+    name = models.CharField(max_length=50)
+    type = models.CharField(max_length=20)
+    color = models.CharField(max_length=20, blank=True, null=True)
+    # blank=True: Allows the field to be left blank in forms (Django admin, etc.).
+    # null=True: Allows the database to store NULL for this field.
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('supply-detail', kwargs={'pk': self.id})
+
 # Create your models here.
 class Plant(models.Model):
     name = models.CharField(max_length=100)
