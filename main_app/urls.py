@@ -14,4 +14,7 @@ urlpatterns = [
         views.add_care, 
         name='add-care'
     ),
+    path('supplies/create/', views.SupplyCreate.as_view(), name='supply-create'),
+    
+
 ]
