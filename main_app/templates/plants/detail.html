@@ -55,7 +55,8 @@
        </form>
 
 
-
+    <h3>Past Care</h3>
+    {% if plant.care_set.all.count %}
       <table>
         <thead>
           <tr>
@@ -72,6 +73,13 @@
           {% endfor %}
         </tbody>
       </table>
+    {% else %}
+      <div class="subsection-content">
+        <p>⚠️ {{plant.name}} has not been care for!</p>
+      </div>
+    {% endif %}
+
+
     </section>
   </div>
   
