@@ -40,4 +40,7 @@ class Care(models.Model):
     plant = models.ForeignKey(Plant, on_delete=models.CASCADE)
     #^one-ton-many relationship, if a Plant record is deleted, all the child Care will be deleted
     def __str__(self):
-        return f"{self.get_time_of_day_display()} on {self.date}"    
+        return f"{self.get_time_of_day_display()} on {self.date}"
+    
+    class Meta:
+        ordering = ['-date']  # This line makes the newest cares appear first
