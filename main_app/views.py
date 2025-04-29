@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Plant
+from .models import Plant, Supply
 from .forms import CareForm
 
 # Create your views here.
@@ -55,3 +55,6 @@ def add_care(request, plant_id):
         new_feeding.save()
     return redirect('plant-detail', plant_id = plant_id)
 
+class SupplyCreate(CreateView):
+    model = Supply
+    fields = '__all__'
