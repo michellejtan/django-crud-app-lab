@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Plant
 from .forms import CareForm
@@ -43,4 +43,15 @@ class PlantDelete(DeleteView):
     model = Plant
     success_url = '/plants/' #make sense in this case, it's no longer in database after delete
 
+def add_care(request, plant_id):
+    # create a ModelForm instance using the data in request.POST
+    form = CareForm(request.POST)
+    # validate the form
+    if form.is_valid():
+        # don't save the form to the db until it
+        # has the plant_id assigned
+        new_feeding = form.save(commit=False)
+        new_feeding.plant_id = plant_id
+        new_feeding.save()
+    return redirect('plant-detail', plant_id = plant_id)
 
