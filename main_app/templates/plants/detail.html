@@ -43,8 +43,8 @@
       </div>
 
       <h3>Add a Care</h3>
-      <!-- Add just above the feedings table -->
-       <form 
+       <form
+       action="{% url 'add-care' plant.id %}"
        method="post" 
        class="subsection-content" 
        autocomplete="off"
