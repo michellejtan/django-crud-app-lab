@@ -23,4 +23,42 @@
       </div>
 </div>
 </section>
+
+<div class="cares-supply-container">
+    <section class="cares">
+      <div class="subsection-title">
+        <h2>Cares</h2>
+        <img
+          src=""
+          alt=""
+        />
+        <img 
+            src="" 
+            alt=""
+        />
+        <img
+          src=""
+          alt=""
+        />
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Time of Day</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for care in plant.care_set.all %}
+            <tr>
+              <td>{{care.date}}</td>
+              <td>{{care.get_time_of_day_display}}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </div>
+  
+
 {% endblock %}
