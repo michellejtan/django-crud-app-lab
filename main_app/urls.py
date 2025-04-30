@@ -15,6 +15,6 @@ urlpatterns = [
         name='add-care'
     ),
     path('supplies/create/', views.SupplyCreate.as_view(), name='supply-create'),
-    path('supplies/<int:pk>/', views.ToyDetail.as_view(), name='supply-detail'),
-    path('supplies/', views.ToyList.as_view(), name='supply-index'),
+    path('supplies/<int:pk>/', views.SupplyDetail.as_view(), name='supply-detail'),
+    path('supplies/', views.SupplyList.as_view(), name='supply-index'),
 ]
