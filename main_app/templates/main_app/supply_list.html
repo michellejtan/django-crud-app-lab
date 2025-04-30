@@ -20,7 +20,11 @@
       <a href="{% url 'supply-detail' supply.id %}">
         <div class="card-content">
           <h2>{{ supply.name }}</h2>
-          <p>A {{ supply.color }} supply</p>
+          {% if supply.color %}
+            <p>A {{ supply.color }} {{ supply.type }}</p>
+          {% else %}
+            <p>A {{ supply.type }} with no specific color</p>
+          {% endif %}
         </div>
       </a>
     </div>

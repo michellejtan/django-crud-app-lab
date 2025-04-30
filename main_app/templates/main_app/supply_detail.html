@@ -5,13 +5,18 @@
 {% endblock %} 
 {% block content %}
 
-<div class="card" style="border-color: {{ supply.color }}">
-  <div class="card-bg" style="background-color: {{ supply.color }}"></div>
+<div class="card" style="border-color: {% if supply.color %}{{ supply.color }}{% else %}#ccc{% endif %}">
+  <div class="card-bg" style="background-color: {% if supply.color %}{{ supply.color }}{% else %}#f5f5f5{% endif %}"></div>
   <div class="card-content">
     <h2>{{ supply.name }}</h2>
-    <p>A {{ supply.color }} supply</p>
+    {% if supply.color %}
+      <p>A {{ supply.color }} {{ supply.type }}</p>
+    {% else %}
+      <p>A {{ supply.type }} with no specific color</p>
+    {% endif %}
   </div>
 </div>
+
 <a href="{% url 'supply-update' supply.id %}" class="btn warn">Edit</a>
 <a href="{% url 'supply-delete' supply.id %}" class="btn danger">Delete</a>
 
