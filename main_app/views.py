@@ -65,3 +65,12 @@ class SupplyList(ListView):
 
 class SupplyDetail(DetailView):
     model = Supply
+
+class SupplyUpdate(UpdateView):
+    model = Supply
+    fields = '__all__'
+    # ['name', 'type', 'color']
+
+class SupplyDelete(DeleteView):
+    model = Supply
+    success_url = '/supplies/'
