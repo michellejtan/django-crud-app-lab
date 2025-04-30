@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from .models import Plant, Supply
 from .forms import CareForm
 
@@ -58,3 +59,9 @@ def add_care(request, plant_id):
 class SupplyCreate(CreateView):
     model = Supply
     fields = '__all__'
+
+class SupplyList(ListView):
+    model = Supply
+
+class SupplyDetail(DetailView):
+    model = Supply
