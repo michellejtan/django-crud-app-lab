@@ -9,10 +9,10 @@
   <div class="card-bg" style="background-color: {{ supply.color }}"></div>
   <div class="card-content">
     <h2>{{ supply.name }}</h2>
-    <p>A {{ supply.color }} toy</p>
+    <p>A {{ supply.color }} supply</p>
   </div>
 </div>
-<a href="" class="btn warn">Edit</a>
-<a href="" class="btn danger">Delete</a>
+<a href="{% url 'supply-update' supply.id %}" class="btn warn">Edit</a>
+<a href="{% url 'supply-delete' supply.id %}" class="btn danger">Delete</a>
 
 {% endblock %}
