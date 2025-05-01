@@ -112,7 +112,9 @@
 
       <h3>Available Supplies</h3>
       <div class="subsection-content">
-        {% for supply in supplies %}
+        {% if supplies.count %} 
+
+        {% for supply in supplies.all %}
           <div class="supply-container">
             <div class="color-block" style="background-color: {{ supply.color }}"></div>
             {% if supply.color %}
@@ -126,6 +128,11 @@
             </form>
           </div>
         {% endfor %}
+
+        {% else %}
+          <p class="all-supplies">{{plant.name}} already has all the available supplies 🥳</p>
+        {% endif %}
+
       </div>
     </section>
     
