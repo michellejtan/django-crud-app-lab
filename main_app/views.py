@@ -29,7 +29,8 @@ def plant_detail(request, plant_id):
     care_form = CareForm()
     return render(request, 'plants/detail.html', {
         'plant': plant, 'care_form': care_form,
-        'supplies': supplies # pass suppliesto the template
+        'supplies': supplies_plant_doesnt_have
+        # 'supplies': supplies # pass suppliesto the template
     })
 
 class PlantCreate(CreateView):
