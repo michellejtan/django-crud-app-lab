@@ -1,13 +1,16 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from .models import Plant, Supply
-from .forms import CareForm
+from .forms import CareForm, CustomUserCreationForm
 
 # Create your views here.
 # Import HttpResponse to send text-based responses
 # from django.http import HttpResponse
+
 
 # Define the home view function
 # def home(request):
@@ -17,8 +20,39 @@ from .forms import CareForm
 class Home(LoginView):
     template_name = 'home.html'
 
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        # This is how to create a 'user' form object
+        # that includes the data from the browser
+        # form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            # This will add the user to the database
+            user = form.save()
+            # This is how we log a user in
+            login(request, user)
+            return redirect('plant-index')
+        else:
+            error_message = 'Invalid sign up - try again'
+    # A bad POST or a GET request, so render signup.html with an empty form
+    # form = UserCreationForm()
+    form = CustomUserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'signup.html', context)
+    # Same as: 
+    # return render(
+    #     request, 
+    #     'signup.html',
+    #     {'form': form, 'error_message': error_message}
+    # )
+
 def plant_index(request):
-    plants = Plant.objects.all()
+    # This reads ALL plants, not just the logged in user's plants
+    # plants = Plant.objects.all()
+    plants = Plant.objects.filter(user=request.user)
+    # You could also retrieve the logged in user's plants like this
+    # plants = request.user.plant_set.all()
     return render(request, 'plants/index.html', {
         'plants': plants
     })
@@ -106,3 +140,5 @@ class SupplyDelete(DeleteView):
 def associate_supply(request, plant_id, supply_id):
     Plant.objects.get(id=plant_id).supplies.add(supply_id)
     return redirect('plant-detail', plant_id=plant_id)
+
+
