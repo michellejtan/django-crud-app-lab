@@ -29,14 +29,26 @@
     </h2>
       
 </section> {% endcomment %}
+{% if not user.is_authenticated %}
 
-<section>
-  <form action="{% url 'home' %}" method="post" class="login">
-    <h1>Login</h1>
-    {% csrf_token %} {{ form.as_p }}
-    <input type="hidden" name="next" value="{{ next }}" />
-    <button type="submit" class="btn submit">Login</button>
-  </form>
-</section>
+  <section>
+    <form action="{% url 'home' %}" method="post" class="login">
+      <h1>Login</h1>
+      {% csrf_token %} {{ form.as_p }}
+      <input type="hidden" name="next" value="{{ next }}" />
+      <button type="submit" class="btn submit">Login</button>
+    </form>
+  </section>
+{% else %}
+  <section class="page-header">
+    <h1>Welcome to Plant Collector</h1>
+    <h2>
+      Plant Collector is a playful application where you can manage a database of cool
+       plants and their supply. 
+    </h2>
+    
+  </section>
+{% endif %}
+
 
 {% endblock %}
