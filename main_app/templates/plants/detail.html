@@ -81,6 +81,33 @@
 
 
     </section>
+
+    <section class="supplies">
+      <div class="subsection-title">
+        <h2>Supplies</h2>
+        <img src="" alt="" />
+        <img src="" alt="" />
+        <img src="" alt="" />
+      </div>
+      <h3>Available Supplies</h3>
+      <div class="subsection-content">
+        {% for supply in supplies %}
+          <div class="supply-container">
+            <div class="color-block" style="background-color: {{ supply.color }}"></div>
+            {% if supply.color %}
+              <p>{{ supply.color }} {{ supply.name }}</p>
+            {% else %}
+              <p> {{ supply.name }}</p>
+            {% endif %}
+            <form action="{% url 'associate-supply' plant.id supply.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="btn submit">Give Supply</button>
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+    </section>
+    
   </div>
   
 
