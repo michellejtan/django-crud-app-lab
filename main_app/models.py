@@ -31,7 +31,10 @@ class Plant(models.Model):
     age = models.IntegerField()
     # Many-to-Many relationship with supplies
     supplies = models.ManyToManyField(Supply)
-
+    # Add the foreign key linking to a user instance
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #^if plant get deleted its associated user get delete too
+    
     def __str__(self):
         return self.name
     
