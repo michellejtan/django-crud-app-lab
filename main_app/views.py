@@ -23,9 +23,11 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
     plant = Plant.objects.get(id=plant_id)
+    supplies = Plant.objects.all() #fetch all supplies
     care_form = CareForm()
     return render(request, 'plants/detail.html', {
-        'plant': plant, 'care_form': care_form
+        'plant': plant, 'care_form': care_form,
+        'supplies': supplies # pass suppliesto the template
     })
 
 class PlantCreate(CreateView):
