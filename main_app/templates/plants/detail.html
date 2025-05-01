@@ -100,6 +100,12 @@
                 <a href="{% url 'supply-detail' supply.id %}">
                   <p>A {{ supply.color }} {{ supply.name }}</p>
                 </a>
+                
+                <form action="{% url 'remove-supply' plant.id supply.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-danger">Remove Supply</button>
+                </form>
+
               </div>
             {% endfor %} 
           {% else %}
