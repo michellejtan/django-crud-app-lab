@@ -25,4 +25,6 @@ urlpatterns = [
     # to associate a plant with a supply
     path('plants/<int:plant_id>/associate-supply/<int:supply_id>/', views.associate_supply, name='associate-supply'),
     path('plants/<int:plant_id>/remove-supply/<int:supply_id>/', views.remove_supply, name='remove-supply'),
+    path('accounts/signup/', views.signup, name='signup'), #no generic view available for this function
+
 ]
