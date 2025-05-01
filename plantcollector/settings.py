@@ -124,6 +124,8 @@ STATIC_URL = 'static/'
 # Add this variable to specify where successful logins should redirect to
 LOGIN_REDIRECT_URL = 'plant-index'
 
+# Add this variable to specify where logging out redirects to
+LOGOUT_REDIRECT_URL = 'home'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
