@@ -6,6 +6,8 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.views import LoginView
 from .models import Plant, Supply
 from .forms import CareForm, CustomUserCreationForm
+from django.contrib.auth.decorators import login_required # to protect view functions
+
 
 # Create your views here.
 # Import HttpResponse to send text-based responses
@@ -47,6 +49,7 @@ def signup(request):
     #     {'form': form, 'error_message': error_message}
     # )
 
+@login_required
 def plant_index(request):
     # This reads ALL plants, not just the logged in user's plants
     # plants = Plant.objects.all()
@@ -57,6 +60,7 @@ def plant_index(request):
         'plants': plants
     })
 
+@login_required
 def plant_detail(request, plant_id):
     plant = Plant.objects.get(id=plant_id)
     # supplies = Supply.objects.all() #fetch all supplies
@@ -68,6 +72,8 @@ def plant_detail(request, plant_id):
         'supplies': supplies_plant_doesnt_have
         # 'supplies': supplies # pass suppliesto the template
     })
+
+@login_required
 def remove_supply(request, plant_id, supply_id):
     # Plant.objects.get(id=plant_id).supplies.remove(supply_id)
     # ^ this finds a particular plant and removes a record from the join
@@ -106,6 +112,7 @@ class PlantDelete(DeleteView):
     model = Plant
     success_url = '/plants/' #make sense in this case, it's no longer in database after delete
 
+@login_required
 def add_care(request, plant_id):
     # create a ModelForm instance using the data in request.POST
     form = CareForm(request.POST)
@@ -137,6 +144,7 @@ class SupplyDelete(DeleteView):
     model = Supply
     success_url = '/supplies/'
 
+@login_required
 def associate_supply(request, plant_id, supply_id):
     Plant.objects.get(id=plant_id).supplies.add(supply_id)
     return redirect('plant-detail', plant_id=plant_id)
