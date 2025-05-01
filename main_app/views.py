@@ -76,3 +76,8 @@ class SupplyUpdate(UpdateView):
 class SupplyDelete(DeleteView):
     model = Supply
     success_url = '/supplies/'
+
+def associate_supply(request, plant_id, supply_id):
+    Plant.objects.get(id=plant_id).supplies.add(supply_id)
+    return redirect('plant-detail', plant_id=plant_id)
+
