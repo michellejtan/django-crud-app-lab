@@ -32,6 +32,17 @@ def plant_detail(request, plant_id):
         'supplies': supplies_plant_doesnt_have
         # 'supplies': supplies # pass suppliesto the template
     })
+def remove_supply(request, plant_id, supply_id):
+    # Plant.objects.get(id=plant_id).supplies.remove(supply_id)
+    # ^ this finds a particular plant and removes a record from the join
+    # table with that plant's id and the id of the supply thus deleting the relationship/association
+    # Look up the plant
+    plant = Plant.objects.get(id=plant_id)
+    # Look up the supply
+    supply = Supply.objects.get(id=supply_id)
+    # Remove the supply from the plant
+    plant.supplies.remove(supply)
+    return redirect('plant-detail', plant_id=plant_id)
 
 class PlantCreate(CreateView):
     model = Plant
@@ -83,4 +94,3 @@ class SupplyDelete(DeleteView):
 def associate_supply(request, plant_id, supply_id):
     Plant.objects.get(id=plant_id).supplies.add(supply_id)
     return redirect('plant-detail', plant_id=plant_id)
-
