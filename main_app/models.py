@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # A tuple of 2-tuples added above our models
 CARE_TIMES = (
