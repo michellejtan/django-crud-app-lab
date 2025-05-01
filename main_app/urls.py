@@ -21,4 +21,7 @@ urlpatterns = [
     path('supplies/<int:pk>/update/', views.SupplyUpdate.as_view(), name='supply-update'),
     path('supplies/<int:pk>/delete/', views.SupplyDelete.as_view(), name='supply-delete'),
 
+    # to associate a plant with a supply
+    path('plants/<int:plant_id>/associate-supply/<int:supply_id>/', views.associate_supply, name='associate-supply'),
+
 ]
