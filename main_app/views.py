@@ -23,7 +23,9 @@ def plant_index(request):
 
 def plant_detail(request, plant_id):
     plant = Plant.objects.get(id=plant_id)
-    supplies = Supply.objects.all() #fetch all supplies
+    # supplies = Supply.objects.all() #fetch all supplies
+    # Only get the supply the plant does not have
+    supplies_plant_doesnt_have = Supply.objects.exclude(id__in = plant.supplies.all().values_list('id'))
     care_form = CareForm()
     return render(request, 'plants/detail.html', {
         'plant': plant, 'care_form': care_form,
