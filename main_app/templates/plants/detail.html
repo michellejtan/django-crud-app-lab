@@ -89,6 +89,27 @@
         <img src="" alt="" />
         <img src="" alt="" />
       </div>
+
+  <!-- displaying a plant's supplies -->
+      <h3>{{ plant.name }}'s Supplies</h3>
+        <div class="subsection-content">
+          {% if plant.supplies.count %}
+            {% for supply in plant.supplies.all %}
+              <div class="supply-container">
+                <div class="color-block" style="background-color: {{ supply.color }}"></div>
+                <a href="{% url 'supply-detail' supply.id %}">
+                  <p>A {{ supply.color }} {{ supply.name }}</p>
+                </a>
+              </div>
+            {% endfor %} 
+          {% else %}
+            <p class="no-supplies">{{plant.name}} doesn't have any supplies!</p>
+          {% endif %}
+  </div>
+
+
+
+
       <h3>Available Supplies</h3>
       <div class="subsection-content">
         {% for supply in supplies %}
