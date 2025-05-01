@@ -7,7 +7,8 @@ from django.contrib.auth.views import LoginView
 from .models import Plant, Supply
 from .forms import CareForm, CustomUserCreationForm
 from django.contrib.auth.decorators import login_required # to protect view functions
-
+# Import the mixin for class-based views
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 # Import HttpResponse to send text-based responses
@@ -86,7 +87,7 @@ def remove_supply(request, plant_id, supply_id):
     plant.supplies.remove(supply)
     return redirect('plant-detail', plant_id=plant_id)
 
-class PlantCreate(CreateView):
+class PlantCreate(LoginRequiredMixin, CreateView):
     model = Plant
     # fields = '__all__'
     # more explicit
@@ -103,12 +104,12 @@ class PlantCreate(CreateView):
 
 
 
-class PlantUpdate(UpdateView):
+class PlantUpdate(LoginRequiredMixin, UpdateView):
     model = Plant
     # things could be misspell
     fields = ['name', 'species', 'description', 'age']
 
-class PlantDelete(DeleteView):
+class PlantDelete(LoginRequiredMixin, DeleteView):
     model = Plant
     success_url = '/plants/' #make sense in this case, it's no longer in database after delete
 
@@ -125,22 +126,22 @@ def add_care(request, plant_id):
         new_feeding.save()
     return redirect('plant-detail', plant_id = plant_id)
 
-class SupplyCreate(CreateView):
+class SupplyCreate(LoginRequiredMixin, CreateView):
     model = Supply
     fields = '__all__'
 
-class SupplyList(ListView):
+class SupplyList(LoginRequiredMixin, ListView):
     model = Supply
 
-class SupplyDetail(DetailView):
+class SupplyDetail(LoginRequiredMixin, DetailView):
     model = Supply
 
-class SupplyUpdate(UpdateView):
+class SupplyUpdate(LoginRequiredMixin, UpdateView):
     model = Supply
     fields = '__all__'
     # ['name', 'type', 'color']
 
-class SupplyDelete(DeleteView):
+class SupplyDelete(LoginRequiredMixin, DeleteView):
     model = Supply
     success_url = '/supplies/'
 
@@ -148,5 +149,3 @@ class SupplyDelete(DeleteView):
 def associate_supply(request, plant_id, supply_id):
     Plant.objects.get(id=plant_id).supplies.add(supply_id)
     return redirect('plant-detail', plant_id=plant_id)
-
-
